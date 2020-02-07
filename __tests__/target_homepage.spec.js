@@ -7,7 +7,7 @@ var assert = require('assert')
 describe("Home Page", () => {
   let driver;
 
-  beforeEach(async () => {
+  before(async () => {
     var capabilities = {
       'browserName': 'Chrome',
       'browser_version': '60.0',
@@ -30,9 +30,9 @@ describe("Home Page", () => {
     await driver.get('http://www.target.com')
   });
 
-  // afterEach(async () => {
-  //   driver.quit();
-  // });
+  after(async () => {
+    driver.quit();
+  });
 
   describe("Header", () => {
     it("should exist", async () => {
