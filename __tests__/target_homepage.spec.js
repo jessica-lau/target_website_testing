@@ -35,13 +35,13 @@ describe("Home Page", () => {
   });
 
   describe("Header", () => {
-    it("should exist", async () => {
+    it.skip("should exist", async () => {
       let title = await driver.getTitle()
       console.log(assert.equal(title, "Target : Expect More. Pay Less."));
 
     });
 
-    it("search item on homepage", async () => {
+    it.skip("search item on homepage", async () => {
       let element = await driver.findElement(By.id(`search`));
       await element.sendKeys('chips\n');
       await driver.sleep(4000);
@@ -51,7 +51,22 @@ describe("Home Page", () => {
       console.log(assert.equal(result, "chips"));
       await driver.sleep(4000);
 
-      driver.quit();
+      
+
+    });
+
+    it("search if cart exists", async () => {
+      let element = await driver.findElement(By.id(`cart`));
+      var isDisplayed = await element.isDisplayed();
+      assert.equal(isDisplayed, 1);
+      await element.click();
+      await driver.sleep(5000);
+      let cartElement = await driver.findElement(By.id(`cart-container`));
+      var isCartElementDisplayed = await cartElement.isDisplayed();
+      assert.equal(isCartElementDisplayed, 1);
+    
+  
+
 
     });
   });
