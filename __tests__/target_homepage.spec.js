@@ -1,8 +1,8 @@
-var webdriver = require('selenium-webdriver')
-  , By = webdriver.By;
+var webdriver = require('selenium-webdriver'),
+By = webdriver.By;
 require('selenium-webdriver/testing');
 
-var assert = require('assert')
+var assert = require('assert');
 
 describe("Home Page", () => {
   let driver;
@@ -17,7 +17,7 @@ describe("Home Page", () => {
       'browserstack.user': process.env.browserstack_user,
       'browserstack.key': process.env.browserstack_key,
       'name': 'B Sample Test'
-    }
+    };
 
     // var builder = new webdriver.Builder().
     //   usingServer('http://hub-cloud.browserstack.com/wd/hub').
@@ -41,17 +41,15 @@ describe("Home Page", () => {
 
     });
 
-    it.skip("search item on homepage", async () => {
+    it("search item on homepage", async () => {
       let element = await driver.findElement(By.id(`search`));
       await element.sendKeys('chips\n');
-      await driver.sleep(4000);
+      await driver.sleep(5000);
       let chipsElement = await driver.findElement(By.className(`h-text-lg`));
       let result = await chipsElement.getText();
       console.log("result:" + result);
       console.log(assert.equal(result, "chips"));
-      await driver.sleep(4000);
-
-      
+      await driver.sleep(5000);      
 
     });
 
@@ -65,9 +63,18 @@ describe("Home Page", () => {
       var isCartElementDisplayed = await cartElement.isDisplayed();
       assert.equal(isCartElementDisplayed, 1);
     
-  
+    });
 
-
+    it("search if profile exists", async () => {
+      let element = await driver.findElement(By.id(`account`));
+      var isDisplayed = await element.isDisplayed();
+      assert.equal(isDisplayed, 1);
+      await element.click();
+      await driver.sleep(5000);
+      let profileElement = await driver.findElement(By.id(`accountNav-myStore`));
+      var isProfileElementDisplayed = await profileElement.isDisplayed();
+      assert.equal(isProfileElementDisplayed, 1);
+    
     });
   });
 });
