@@ -41,7 +41,7 @@ describe("Home Page", () => {
 
     });
 
-    it("search item on homepage", async () => {
+    it.skip("search item on homepage", async () => {
       let element = await driver.findElement(By.id(`search`));
       await element.sendKeys('chips\n');
       await driver.sleep(5000);
@@ -53,28 +53,56 @@ describe("Home Page", () => {
 
     });
 
-    it("search if cart exists", async () => {
+    it.skip("search if cart exists", async () => {
       let element = await driver.findElement(By.id(`cart`));
-      var isDisplayed = await element.isDisplayed();
+      let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
       await element.click();
       await driver.sleep(5000);
       let cartElement = await driver.findElement(By.id(`cart-container`));
-      var isCartElementDisplayed = await cartElement.isDisplayed();
+      let isCartElementDisplayed = await cartElement.isDisplayed();
       assert.equal(isCartElementDisplayed, 1);
     
     });
 
-    it("search if profile exists", async () => {
+    it.skip("search if profile exists", async () => {
       let element = await driver.findElement(By.id(`account`));
-      var isDisplayed = await element.isDisplayed();
+      let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
       await element.click();
       await driver.sleep(5000);
       let profileElement = await driver.findElement(By.id(`accountNav-myStore`));
-      var isProfileElementDisplayed = await profileElement.isDisplayed();
+      let isProfileElementDisplayed = await profileElement.isDisplayed();
       assert.equal(isProfileElementDisplayed, 1);
     
+    });
+
+    it.skip("search if deals have clearance element", async () => {
+      let element = await driver.findElement(By.id(`secondary`));
+      let isDisplayed = await element.isDisplayed();
+      assert.equal(isDisplayed, 1);
+      await element.click();
+      await driver.sleep(5000);
+      let dealsMenu = driver.findElement(By.id(`deals-clearance`));
+      let isDealsMenuDisplayed = await dealsMenu.isDisplayed();
+      assert.equal(isDealsMenuDisplayed, 1);
+      await dealsMenu.click();
+      await driver.sleep(5000);
+    });
+
+    it("search if whats new have new in women element", async () => {
+      await driver.sleep(5000);
+      let element = await driver.findElement(By.id(`trending`));
+      let isDisplayed = await element.isDisplayed();
+      assert.equal(isDisplayed, 1);
+      await element.click();
+      await driver.sleep(5000);
+      let headerModalTrending = driver.findElement(By.className(`HeaderModalTrending`));
+      let trendingMenu = await headerModalTrending.findElements(By.css(`li`));
+      let isTrendingMenuDisplayed = await trendingMenu[1].isDisplayed();
+      assert.equal(isTrendingMenuDisplayed, 1);
+      await trendingMenu[1].click();
+      await driver.sleep(5000);
     });
   });
 });
