@@ -1,7 +1,7 @@
 var webdriver = require('selenium-webdriver'),
-By = webdriver.By;
+  By = webdriver.By;
 require('selenium-webdriver/testing');
-
+require('dotenv').config();
 var assert = require('assert');
 
 describe("Home Page", () => {
@@ -13,21 +13,28 @@ describe("Home Page", () => {
       'browser_version': '60.0',
       'os': 'Windows',
       'os_version': '10',
-      'resolution': '1024x768',
+      'resolution': '1920x1080',
       'browserstack.user': process.env.browserstack_user,
       'browserstack.key': process.env.browserstack_key,
       'name': 'B Sample Test'
     };
+    //Note: run test on browserstacker:
 
     // var builder = new webdriver.Builder().
     //   usingServer('http://hub-cloud.browserstack.com/wd/hub').
     //   withCapabilities(capabilities);
     // driver = await builder.build();
-     driver = new webdriver.Builder()
+
+    //Note: run test on local broswer:
+
+    driver = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.chrome())
       .build();
+
     console.log("started testing");
-    await driver.get('http://www.target.com')
+    driver.manage().window().maximize();
+    await driver.get('http://www.target.com');
+
   });
 
   after(async () => {
@@ -38,10 +45,9 @@ describe("Home Page", () => {
     it.skip("should exist", async () => {
       let title = await driver.getTitle()
       console.log(assert.equal(title, "Target : Expect More. Pay Less."));
-
     });
 
-    it.skip("search item on homepage", async () => {
+    it("search item on homepage", async () => {
       let element = await driver.findElement(By.id(`search`));
       await element.sendKeys('chips\n');
       await driver.sleep(5000);
@@ -49,11 +55,11 @@ describe("Home Page", () => {
       let result = await chipsElement.getText();
       console.log("result:" + result);
       console.log(assert.equal(result, "chips"));
-      await driver.sleep(5000);      
+      await driver.sleep(5000);
 
     });
 
-    it.skip("search if cart exists", async () => {
+    it("search if cart exists", async () => {
       let element = await driver.findElement(By.id(`cart`));
       let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
@@ -62,10 +68,10 @@ describe("Home Page", () => {
       let cartElement = await driver.findElement(By.id(`cart-container`));
       let isCartElementDisplayed = await cartElement.isDisplayed();
       assert.equal(isCartElementDisplayed, 1);
-    
+
     });
 
-    it.skip("search if profile exists", async () => {
+    it("search if profile exists", async () => {
       let element = await driver.findElement(By.id(`account`));
       let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
@@ -74,10 +80,10 @@ describe("Home Page", () => {
       let profileElement = await driver.findElement(By.id(`accountNav-myStore`));
       let isProfileElementDisplayed = await profileElement.isDisplayed();
       assert.equal(isProfileElementDisplayed, 1);
-    
+
     });
 
-    it.skip("search if deals have clearance element", async () => {
+    it.skip("search if deals have clearance category", async () => {
       let element = await driver.findElement(By.id(`secondary`));
       let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
@@ -90,8 +96,7 @@ describe("Home Page", () => {
       await driver.sleep(5000);
     });
 
-    it("search if whats new have new in women element", async () => {
-      await driver.sleep(5000);
+    it("search if whats new have new in women category", async () => {
       let element = await driver.findElement(By.id(`trending`));
       let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);
@@ -104,5 +109,17 @@ describe("Home Page", () => {
       await trendingMenu[1].click();
       await driver.sleep(5000);
     });
+
+    it("search if same day delivery exists", async () => {
+      let element = await driver.findElement(By.id(`SameDayLink`));
+      let isDisplayed = await element.isDisplayed();
+      assert.equal(isDisplayed, 1);
+      await element.click();
+      await driver.sleep(5000);
+      let sameDayDeliveryElement = await driver.findElement(By.id(`tab-Shop`));
+      let isSameDayElementDisplayed = await sameDayDeliveryElement.isDisplayed();
+      assert.equal(isSameDayElementDisplayed, 1);
+    });
+
   });
 });
