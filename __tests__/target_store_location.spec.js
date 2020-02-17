@@ -31,8 +31,7 @@ describe("Home Page", () => {
         localChromeOption.addArguments("--start-maximized");
         localChromeOption.addArguments("--disable-web-security");
         localChromeOption.addArguments("--allow-running-insecure-content");
-        localChromeOption.addArguments("--reduce-security-for-testing");
-        // localChromeOption.addExtensions("./Disable-Content-Security-Policy-Chrome_v1.0.6.crx")
+        localChromeOption.setAcceptInsecureCerts(true)
         driver = new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.chrome())
             .setChromeOptions(localChromeOption)
@@ -55,35 +54,19 @@ describe("Home Page", () => {
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("get onto login page", async () => {
-            let userAccount = await driver.findElement(By.id(`account`));
-            let isUserAccountDisplayed = await userAccount.isDisplayed();
-            assert.equal(isUserAccountDisplayed, 1);
-            await userAccount.click();
+        it("change store location", async () => {
+            let storeLocation = await driver.findElement(By.id(`storeId-utilityNavBtn`));
+            let isStoreLocationDisplayed = await storeLocation.isDisplayed();
+            assert.equal(isStoreLocationDisplayed, 1);
+            await storeLocation.click();
             await driver.sleep(5000);
-            let signInMenu = driver.findElement(By.id(`accountNav-signIn`));
-            let isSignInMenuDisplayed = await signInMenu.isDisplayed();
-            assert.equal(isSignInMenuDisplayed, 1);
-            await signInMenu.click();
-            await driver.sleep(5000);
-        });
+            let enterLocation = driver.findElement(By.id(`zipOrCityState`));
+            let isenterLocationDisplayed = await enterLocation.isDisplayed();
+            assert.equal(isenterLocationDisplayed, 1);
+            await enterLocation.click();
+            await enterLocation.sendKeys('Watertown\n');
+            await driver.sleep(10000);
 
-        it("sign in with username & password", async () => {
-            let usernameField = await driver.findElement(By.id(`username`));
-            let isUsernameFieldDisplayed = await usernameField.isDisplayed();
-            assert.equal(isUsernameFieldDisplayed, 1);
-            await usernameField.click();
-            await usernameField.sendKeys(process.env.target_user);
-            let passwordField = driver.findElement(By.id(`password`));
-            let isPasswordFieldDisplayed = await passwordField.isDisplayed();
-            assert.equal(isPasswordFieldDisplayed, 1);
-            await passwordField.click();
-            await passwordField.sendKeys(process.env.target_password);
-            let clickSignIn = driver.findElement(By.id(`login`));
-            let isSignInButtonDisplayed = await clickSignIn.isDisplayed();
-            assert.equal(isSignInButtonDisplayed, 1);
-            await clickSignIn.click();
-            await driver.sleep(5000);
         });
     });
 });
