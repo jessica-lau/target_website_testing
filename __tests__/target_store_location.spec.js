@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Home Page", () => {
+describe("Store Location", () => {
     let driver;
 
     before(async () => {
@@ -32,7 +32,7 @@ describe("Home Page", () => {
         localChromeOption.addArguments("--disable-web-security");
         localChromeOption.addArguments("--allow-running-insecure-content");
         localChromeOption.setAcceptInsecureCerts(true)
-        driver = new webdriver.Builder()
+        driver = await new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.chrome())
             .setChromeOptions(localChromeOption)
             .build();
@@ -44,7 +44,7 @@ describe("Home Page", () => {
     });
 
     after(async () => {
-        driver.quit();
+    await driver.quit();
     });
 
     describe("Header", () => {
@@ -66,7 +66,6 @@ describe("Home Page", () => {
             await enterLocation.click();
             await enterLocation.sendKeys('Watertown\n');
             await driver.sleep(10000);
-
         });
     });
 });

@@ -3,6 +3,7 @@ var webdriver = require('selenium-webdriver'),
 require('selenium-webdriver/testing');
 require('dotenv').config();
 var assert = require('assert');
+let chrome = require('selenium-webdriver/chrome');
 
 describe("Home Page", () => {
   let driver;
@@ -26,19 +27,22 @@ describe("Home Page", () => {
     // driver = await builder.build();
 
     //Note: run test on local broswer:
+    let localChromeOption = new chrome.Options();
+    localChromeOption.addArguments("--start-maximized");
 
-    driver = new webdriver.Builder()
+    driver = await new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.chrome())
+      .setChromeOptions(localChromeOption)
       .build();
 
     console.log("started testing");
-    driver.manage().window().maximize();
+    //driver.manage().window().maximize();
     await driver.get('http://www.target.com');
 
   });
 
   after(async () => {
-    driver.quit();
+    await driver.quit();
   });
 
   describe("Header", () => {
@@ -83,7 +87,7 @@ describe("Home Page", () => {
 
     });
 
-    it.skip("search if deals have clearance category", async () => {
+    it("search if deals have clearance category", async () => {
       let element = await driver.findElement(By.id(`secondary`));
       let isDisplayed = await element.isDisplayed();
       assert.equal(isDisplayed, 1);

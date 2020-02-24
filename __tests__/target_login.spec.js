@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Home Page", () => {
+describe("Login", () => {
     let driver;
 
     before(async () => {
@@ -33,7 +33,7 @@ describe("Home Page", () => {
         localChromeOption.addArguments("--allow-running-insecure-content");
         localChromeOption.addArguments("--reduce-security-for-testing");
         // localChromeOption.addExtensions("./Disable-Content-Security-Policy-Chrome_v1.0.6.crx")
-        driver = new webdriver.Builder()
+        driver = await new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.chrome())
             .setChromeOptions(localChromeOption)
             .build();
@@ -45,7 +45,7 @@ describe("Home Page", () => {
     });
 
     after(async () => {
-        driver.quit();
+    await driver.quit();
     });
 
     describe("Header", () => {
