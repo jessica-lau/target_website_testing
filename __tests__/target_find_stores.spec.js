@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Store Location", () => {
+describe("Find Store", () => {
     let driver;
 
     before(async () => {
@@ -54,7 +54,7 @@ describe("Store Location", () => {
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("change store location", async () => {
+        it("find store location", async () => {
             let findStore = await driver.findElement(By.linkText(`Find Stores`));
             let isFindStoreDisplayed = await findStore.isDisplayed();
             assert.equal(isFindStoreDisplayed, 1);

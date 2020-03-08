@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Favorites", () => {
+describe("Help", () => {
     let driver;
 
     before(async () => {
@@ -26,7 +26,7 @@ describe("Favorites", () => {
         //   withCapabilities(capabilities);
         // driver = await builder.build();
 
-        //Note: run test on local broswer:
+        //Note: run test on local browser:
         let localChromeOption = new chrome.Options();
         localChromeOption.addArguments("--start-maximized");
         localChromeOption.addArguments("--disable-web-security");
@@ -44,21 +44,47 @@ describe("Favorites", () => {
     });
 
     after(async () => {
-    await driver.quit();
+        await driver.quit();
     });
 
     describe("Header", () => {
-        it("should exist", async () => {
+        it.skip("should exist", async () => {
             await driver.sleep(5000);
             let title = await driver.getTitle()
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("find favorites", async () => {
-            let favorites = await driver.findElement(By.css(`[data-test="crushHeader"]`));
-            let isFavoritesDisplayed = await favorites.isDisplayed();
-            assert.equal(isFavoritesDisplayed, 1);
-            await favorites.click();
+        it("search help", async () => {
+            let help = await driver.findElement(By.css(`[data-test="footerMenu-Help"]`));
+            let isHelpDisplayed = await help.isDisplayed();
+            assert.equal(isHelpDisplayed, 1);
+            await help.click();
+            await driver.sleep(5000);
+        });
+
+        it("search contact us", async () => {
+            let contactUs = await driver.findElement(By.css(`[aria-label="Contact Us"]`));
+            let isContactUsDisplayed = await contactUs.isDisplayed();
+            assert.equal(isContactUsDisplayed, 1);
+            await contactUs.click();
+
+            let helpTopic = await driver.findElement(By.css(`[aria-labelledby="choose topic"]`));
+            let ishelpTopicDisplayed = await helpTopic.isDisplayed();
+            assert.equal(ishelpTopicDisplayed, 1);
+            await helpTopic.click();
+
+            let helpDropdown = await driver.findElement(By.className(`dropdown-menu`));
+            let selectionList = await helpDropdown.findElements(By.css(`li`));
+            let ishelpDropdownDisplayed = await helpDropdown.isDisplayed();
+            assert.equal(ishelpDropdownDisplayed, 1);
+            console.log(helpDropdown)
+            for (let listItem of selectionList) {
+                let text = await listItem.getText()
+                console.log(text)
+                if (text === "Corporate Information") {
+                    listItem.click()
+                }
+            }
             await driver.sleep(5000);
         });
     });
