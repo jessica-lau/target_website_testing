@@ -52,8 +52,8 @@ describe("Home Page", () => {
     });
 
     it("search item on homepage", async () => {
-      let element = await driver.findElement(By.id(`search`));
-      await element.sendKeys('chips\n');
+      let chips = await driver.findElement(By.id(`search`));
+      await chips.sendKeys('chips\n');
       await driver.sleep(5000);
       let chipsElement = await driver.findElement(By.className(`h-text-lg`));
       let result = await chipsElement.getText();
@@ -64,10 +64,10 @@ describe("Home Page", () => {
     });
 
     it("search if cart exists", async () => {
-      let element = await driver.findElement(By.id(`cart`));
-      let isDisplayed = await element.isDisplayed();
-      assert.equal(isDisplayed, 1);
-      await element.click();
+      let cart = await driver.findElement(By.id(`cart`));
+      let isCartDisplayed = await cart.isDisplayed();
+      assert.equal(isCartDisplayed, 1);
+      await cart.click();
       await driver.sleep(5000);
       let cartElement = await driver.findElement(By.id(`cart-container`));
       let isCartElementDisplayed = await cartElement.isDisplayed();
@@ -76,10 +76,10 @@ describe("Home Page", () => {
     });
 
     it("search if profile exists", async () => {
-      let element = await driver.findElement(By.id(`account`));
-      let isDisplayed = await element.isDisplayed();
-      assert.equal(isDisplayed, 1);
-      await element.click();
+      let profile = await driver.findElement(By.id(`account`));
+      let isProfileDisplayed = await profile.isDisplayed();
+      assert.equal(isProfileDisplayed, 1);
+      await profile.click();
       await driver.sleep(5000);
       let profileElement = await driver.findElement(By.id(`accountNav-myStore`));
       let isProfileElementDisplayed = await profileElement.isDisplayed();
@@ -88,10 +88,10 @@ describe("Home Page", () => {
     });
 
     it("search if deals have clearance category", async () => {
-      let element = await driver.findElement(By.id(`secondary`));
-      let isDisplayed = await element.isDisplayed();
-      assert.equal(isDisplayed, 1);
-      await element.click();
+      let deals = await driver.findElement(By.id(`secondary`));
+      let isDealsDisplayed = await deals.isDisplayed();
+      assert.equal(isDealsDisplayed, 1);
+      await deals.click();
       await driver.sleep(5000);
       let dealsMenu = driver.findElement(By.id(`deals-clearance`));
       let isDealsMenuDisplayed = await dealsMenu.isDisplayed();
@@ -101,10 +101,10 @@ describe("Home Page", () => {
     });
 
     it("search if whats new have new in women category", async () => {
-      let element = await driver.findElement(By.id(`trending`));
-      let isDisplayed = await element.isDisplayed();
-      assert.equal(isDisplayed, 1);
-      await element.click();
+      let whatsNew = await driver.findElement(By.id(`trending`));
+      let isWhatsNewDisplayed = await whatsNew.isDisplayed();
+      assert.equal(isWhatsNewDisplayed, 1);
+      await whatsNew.click();
       await driver.sleep(5000);
       let headerModalTrending = driver.findElement(By.className(`HeaderModalTrending`));
       let trendingMenu = await headerModalTrending.findElements(By.css(`li`));
@@ -115,10 +115,10 @@ describe("Home Page", () => {
     });
 
     it("search if same day delivery exists", async () => {
-      let element = await driver.findElement(By.id(`SameDayLink`));
-      let isDisplayed = await element.isDisplayed();
-      assert.equal(isDisplayed, 1);
-      await element.click();
+      let sameDayDelivery = await driver.findElement(By.id(`SameDayLink`));
+      let isSameDayDeliveryDisplayed = await sameDayDelivery.isDisplayed();
+      assert.equal(isSameDayDeliveryDisplayed, 1);
+      await sameDayDelivery.click();
       await driver.sleep(5000);
       let sameDayDeliveryElement = await driver.findElement(By.id(`tab-Shop`));
       let isSameDayElementDisplayed = await sameDayDeliveryElement.isDisplayed();
