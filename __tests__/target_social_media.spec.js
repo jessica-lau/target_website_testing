@@ -54,25 +54,89 @@ describe("Social Media", () => {
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("search social media", async () => {
+        it("select pinterest", async () => {
             let socialMedia = await driver.findElement(By.css(`[data-test="footerMenu-Social"]`));
             let isSocialMediaDisplayed = await socialMedia.isDisplayed();
             assert.equal(isSocialMediaDisplayed, 1);
             await socialMedia.click();
             await driver.sleep(5000);
+            let pinterest = await driver.findElement(By.css(`[aria-label="Pinterest"]`));
+            let isPinterestDisplayed = await pinterest.isDisplayed();
+            assert.equal(isPinterestDisplayed, 1);
+            await pinterest.click();
+            await driver.sleep(5000);
+            let openPinterestModal = await driver.findElement(By.css(`[data-test="externaLinkModal--stayButton"]`));
+            let isOpenPinterestDisplayed = await openPinterestModal.isDisplayed();
+            assert.equal(isOpenPinterestDisplayed, 1);
+            await openPinterestModal.click();
+        });
+
+        it("select facebook", async () => {
+            let socialMedia = await driver.findElement(By.css(`[data-test="footerMenu-Social"]`));
+            let isSocialMediaDisplayed = await socialMedia.isDisplayed();
+            assert.equal(isSocialMediaDisplayed, 1);
+            await socialMedia.click();
+            await driver.sleep(5000);
+            let facebook = await driver.findElement(By.css(`[aria-label="Facebook"]`));
+            let isFacebookDisplayed = await facebook.isDisplayed();
+            assert.equal(isFacebookDisplayed, 1);
+            await facebook.click();
+            await driver.sleep(5000);
+            let openFacebookModal = await driver.findElement(By.css(`[data-test="externaLinkModal--stayButton"]`));
+            let isOpenFacebookDisplayed = await openFacebookModal.isDisplayed();
+            assert.equal(isOpenFacebookDisplayed, 1);
+            await openFacebookModal.click();
+        });
+
+        it("select instagram", async () => {
+            let socialMedia = await driver.findElement(By.css(`[data-test="footerMenu-Social"]`));
+            let isSocialMediaDisplayed = await socialMedia.isDisplayed();
+            assert.equal(isSocialMediaDisplayed, 1);
+            await socialMedia.click();
+            await driver.sleep(5000);
+            let instagram = await driver.findElement(By.css(`[aria-label="Instagram"]`));
+            let isInstagramDisplayed = await instagram.isDisplayed();
+            assert.equal(isInstagramDisplayed, 1);
+            await instagram.click();
+            await driver.sleep(5000);
+            let openInstagramModal = await driver.findElement(By.css(`[data-test="externaLinkModal--stayButton"]`));
+            let isOpenInstagramDisplayed = await openInstagramModal.isDisplayed();
+            assert.equal(isOpenInstagramDisplayed, 1);
+            await openInstagramModal.click();
+        });
+
+        it("select twitter", async () => {
+            let socialMedia = await driver.findElement(By.css(`[data-test="footerMenu-Social"]`));
+            let isSocialMediaDisplayed = await socialMedia.isDisplayed();
+            assert.equal(isSocialMediaDisplayed, 1);
+            await socialMedia.click();
+            await driver.sleep(5000);
+            let twitter = await driver.findElement(By.css(`[aria-label="Twitter"]`));
+            let isTwitterDisplayed = await twitter.isDisplayed();
+            assert.equal(isTwitterDisplayed, 1);
+            await twitter.click();
+            await driver.sleep(5000);
+            let openTwitterModal = await driver.findElement(By.css(`[data-test="externaLinkModal--stayButton"]`));
+            let isOpenTwitterDisplayed = await openTwitterModal.isDisplayed();
+            assert.equal(isOpenTwitterDisplayed, 1);
+            await openTwitterModal.click();
         });
 
         it("select youtube", async () => {
+            let socialMedia = await driver.findElement(By.css(`[data-test="footerMenu-Social"]`));
+            let isSocialMediaDisplayed = await socialMedia.isDisplayed();
+            assert.equal(isSocialMediaDisplayed, 1);
+            await socialMedia.click();
+            await driver.sleep(5000);
             let youtube = await driver.findElement(By.css(`[aria-label="Youtube"]`));
             let isYoutubeDisplayed = await youtube.isDisplayed();
             assert.equal(isYoutubeDisplayed, 1);
             await youtube.click();
             await driver.sleep(5000);
-            let openYoutube = await driver.findElement(By.linkText("Continue"));
-            let isOpenYoutubeDisplayed = await openYoutube.isDisplayed();
+            let openYoutubeModal = await driver.findElement(By.css(`[data-test="externaLinkModal--stayButton"]`));
+            let isOpenYoutubeDisplayed = await openYoutubeModal.isDisplayed();
             assert.equal(isOpenYoutubeDisplayed, 1);
-            await openYoutube.click();
-            await driver.sleep(5000);
+            await openYoutubeModal.click();
         });
     });
 });
