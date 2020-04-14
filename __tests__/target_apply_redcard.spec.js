@@ -44,7 +44,7 @@ describe("Store Location", () => {
     });
 
     after(async () => {
-    await driver.quit();
+        await driver.quit();
     });
 
     describe("Header", () => {
@@ -54,7 +54,7 @@ describe("Store Location", () => {
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("apply for redcard credit", async () => {
+        it.skip("apply for redcard credit", async () => {
             let applyRedCard = await driver.findElement(By.linkText(`RedCard`));
             let isApplyRedCardDisplayed = await applyRedCard.isDisplayed();
             assert.equal(isApplyRedCardDisplayed, 1);
@@ -73,11 +73,62 @@ describe("Store Location", () => {
             assert.equal(isApplyRedCardDisplayed, 1);
             await applyRedCard.click();
             await driver.sleep(5000);
+
             let applyRedCardDebit = driver.findElement(By.linkText(`Apply for debit`));
             let isApplyRedCardDebitDisplayed = await applyRedCardDebit.isDisplayed();
             assert.equal(isApplyRedCardDebitDisplayed, 1);
             await applyRedCardDebit.click();
+
+            let windows = await driver.getAllWindowHandles();
+            let currentWindow = await driver.getWindowHandle();
+            console.log(windows);
+            console.log(currentWindow);
+            await driver.switchTo().window(windows[1]);
+
+            let firstName = driver.findElement(By.id(`txtFirstName`));
+            let isFirstNameDisplayed = await firstName.isDisplayed();
+            assert.equal(isFirstNameDisplayed, 1);
+            await firstName.click();
+            await firstName.sendKeys('Jessica');
+            let lastName = driver.findElement(By.id(`txtLastName`));
+            let isLastNameDisplayed = await lastName.isDisplayed();
+            assert.equal(isLastNameDisplayed, 1);
+            await lastName.click();
+            await lastName.sendKeys('None');
+            let phoneNumber = driver.findElement(By.id(`txtPhonePrimary`));
+            let isPhoneNumberDisplayed = await phoneNumber.isDisplayed();
+            assert.equal(isPhoneNumberDisplayed, 1);
+            await phoneNumber.click();
+            await phoneNumber.sendKeys('555-555-5555');
+
+            let phoneType = driver.findElement(By.id(`txtPhoneTypePrimary`));
+            let isPhoneTypeDisplayed = await phoneType.isDisplayed();
+            assert.equal(isPhoneTypeDisplayed, 1);
+            await phoneType.click();
+            let phoneHome = driver.findElement(By.css(`[value="H"]`));
+            let isPhoneHomeDisplayed = await phoneHome.isDisplayed();
+            assert.equal(isPhoneHomeDisplayed, 1);
+            await phoneHome.click();
+
+            let email = driver.findElement(By.id(`txtEmail`));
+            let isEmailDisplayed = await email.isDisplayed();
+            assert.equal(isEmailDisplayed, 1);
+            await email.click();
+            await email.sendKeys('freelancegigtest@gmail.com');
+            let confirmEmail = driver.findElement(By.id(`txtConfirmEmail`));
+            let isConfirmEmailDisplayed = await confirmEmail.isDisplayed();
+            assert.equal(isConfirmEmailDisplayed, 1);
+            await confirmEmail.click();
+            await confirmEmail.sendKeys('freelancegigtest@gmail.com');
             await driver.sleep(5000);
+
+            let continueButton = driver.findElement(By.css(`[value="continue  "]`));
+            let isContinueButtonDisplayed = await continueButton.isDisplayed();
+            assert.equal(isContinueButtonDisplayed, 1);
+            await continueButton.click();
+            await driver.sleep(3000);
+
         });
+
     });
 });
