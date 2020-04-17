@@ -29,6 +29,7 @@
     "test7": "node node_modules/mocha/bin/mocha ./__tests__/target_social_media.spec.js --timeout=60000",
     "test8": "node node_modules/mocha/bin/mocha ./__tests__/target_careers.spec.js --timeout=60000",
     "test9": "node node_modules/mocha/bin/mocha ./__tests__/target_apply_redcard.spec.js --timeout=60000",
+    "test10": "node node_modules/mocha/bin/mocha ./__tests__/target_giftcards.spec.js --timeout=60000",
     "testall": "node node_modules/mocha/bin/mocha ./__tests__/*.spec.js --timeout=60000",
     "test2 report": "node node_modules/mocha/bin/mocha ./seleniumTest2.js --timeout=60000 --reporter mocha-simple-html-reporter --reporter-options output=report.html",
     "test2-watch": "node node_modules/mocha/bin/mocha ./selenuimTest2.js --watch --recursive --timeout=60000"
