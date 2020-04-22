@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Store Location", () => {
+describe("Apply Red Card", () => {
     let driver;
 
     before(async () => {

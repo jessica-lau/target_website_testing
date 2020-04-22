@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Gift Cards", () => {
+describe("Weekly Ad", () => {
     let driver;
 
     before(async () => {
@@ -44,7 +44,7 @@ describe("Gift Cards", () => {
     });
 
     after(async () => {
-    await driver.quit();
+        await driver.quit();
     });
 
     describe("Header", () => {
@@ -54,30 +54,33 @@ describe("Gift Cards", () => {
             console.log(assert.equal(title, "Target : Expect More. Pay Less."));
         });
 
-        it("find giftcards", async () => {
-            let giftcards = await driver.findElement(By.linkText(`Gift Cards`));
-            let isGiftCardsDisplayed = await giftcards.isDisplayed();
-            assert.equal(isGiftCardsDisplayed, 1);
-            await giftcards.click();
-            // let giftCardBalance = await driver.findElement(By.className(`ItemTitle-yw3r8r-0 jQnKhK`));
-            // let isGiftCardBalanceDisplayed = await giftCardBalance.isDisplayed();
-            // assert.equal(isGiftCardBalanceDisplayed, 1);
-            // await giftCardBalance.click();
-            // await driver.sleep(5000);
-            // let giftCardNumber = await driver.findElement(By.id(`giftCardNumber`));
-            // let isGiftCardNumberDisplayed = await giftCardNumber.isDisplayed();
-            // assert.equal(isGiftCardNumberDisplayed, 1);
-            // await giftCardNumber.sendKeys(041215177920662);
-            // let giftCardAccess = await driver.findElement(By.id(`accessNumber`));
-            // let isGiftCardAccessDisplayed = await giftCardAccess.isDisplayed();
-            // assert.equal(isGiftCardAccessDisplayed, 1);
-            // await giftCardAccess.sendKeys(15826471);
-            // let checkBalance = await driver.findElement(By.id(`queryGiftCard`));
-            // let isCheckBalanceDisplayed = await checkBalance.isDisplayed();
-            // assert.equal(isCheckBalanceDisplayed, 1);
-            // await checkBalance.click();
-            // await driver.sleep(5000);
-
-        });
+        it("weekly ad", async () => {
+            let weeklyAd = await driver.findElement(By.linkText(`Weekly Ad`));
+            let isWeeklyAdDisplayed = await weeklyAd.isDisplayed();
+            assert.equal(isWeeklyAdDisplayed, 1);
+            await weeklyAd.click();
+            await driver.sleep(3000);
+            let viewWeeklyAd = await driver.findElement(By.className(`view-ad-track`));
+            let isViewWeeklyAdDisplayed = await viewWeeklyAd.isDisplayed();
+            assert.equal(isViewWeeklyAdDisplayed, 1);
+            await viewWeeklyAd.click();
+            await driver.sleep(3000);
+            let viewNextPage = await driver.findElement(By.id(`nextArrow`));
+            let isViewNextPageDisplayed = await viewNextPage.isDisplayed();
+            assert.equal(isViewNextPageDisplayed, 1);
+            await viewNextPage.click();
+            await driver.sleep(5000);
+            let zoomPage = await driver.findElement(By.className(`zoom`));
+            let isZoomPageDisplayed = await zoomPage.isDisplayed();
+            assert.equal(isZoomPageDisplayed, 1);
+            await zoomPage.click();
+            await driver.sleep(5000);
+            let exitZoom = await driver.findElement(By.id(`closeButton`));
+            let isExitZoomDisplayed = await exitZoom.isDisplayed();
+            assert.equal(isExitZoomDisplayed,1);
+            await exitZoom.click();
+            await driver.sleep(3000);
+        })
     });
+
 });
