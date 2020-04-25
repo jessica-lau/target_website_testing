@@ -71,8 +71,12 @@ describe("Lookup Registries", () => {
             let isSearchNameDisplayed = await searchName.isDisplayed();
             assert.equal(isSearchNameDisplayed, 1);
             await searchName.click();
-            await driver.sleep(3000);
-
+            await driver.sleep(5000);
+            let showFilters = await driver.findElement(By.className(`Button__ButtonWithStyles-sc-1phqvxd-0 bQUSlc`));
+            let isShowFiltersDisplayed = await showFilters.isDisplayed();
+            assert.equal(isShowFiltersDisplayed, 1);
+            await showFilters.click();
+            await driver.sleep(5000);
         })
     });
 
