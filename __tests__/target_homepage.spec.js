@@ -120,7 +120,7 @@ describe("Home Page", () => {
       assert.equal(isSameDayDeliveryDisplayed, 1);
       await sameDayDelivery.click();
       await driver.sleep(5000);
-      let sameDayDeliveryElement = await driver.findElement(By.id(`tab-Shop`));
+      let sameDayDeliveryElement = await driver.findElement(By.id(`tab-Browse`));
       let isSameDayElementDisplayed = await sameDayDeliveryElement.isDisplayed();
       assert.equal(isSameDayElementDisplayed, 1);
     });
