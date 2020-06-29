@@ -5,7 +5,7 @@ require('dotenv').config();
 var assert = require('assert');
 let chrome = require('selenium-webdriver/chrome');
 
-describe("Home Page", () => {
+describe("increase quantity of selected item", () => {
     let driver;
 
     before(async () => {
