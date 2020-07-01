@@ -33,6 +33,7 @@
     "test11": "node node_modules/mocha/bin/mocha ./__tests__/target_weekly_ad.spec.js --timeout=60000",
     "test12": "node node_modules/mocha/bin/mocha ./__tests__/target_registries_lookup.spec.js --timeout=60000",
     "test13": "node node_modules/mocha/bin/mocha ./__tests__/target_increase_item_quantity.spec.js --timeout=60000",
+    "test14": "node node_modules/mocha/bin/mocha ./__tests__/target_get_app.spec.js --timeout=60000",
     "testall": "node node_modules/mocha/bin/mocha ./__tests__/*.spec.js --timeout=60000",
     "test2 report": "node node_modules/mocha/bin/mocha ./seleniumTest2.js --timeout=60000 --reporter mocha-simple-html-reporter --reporter-options output=report.html",
     "test2-watch": "node node_modules/mocha/bin/mocha ./selenuimTest2.js --watch --recursive --timeout=60000"
